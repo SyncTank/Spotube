@@ -1,5 +1,6 @@
 import requests
 from requests.auth import HTTPBasicAuth
-import UserAuth
+from UserAuth import App_authentication
 
-print("f")
+
+New_user = App_authentication()
