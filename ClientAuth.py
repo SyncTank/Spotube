@@ -8,7 +8,7 @@ class App_authentication:
 
     def setup_client(self) -> None:
         try:
-            with open("UserAuth.txt", "r") as file:
+            with open("ClientAuth.txt", "r") as file:
                 self._content = file.readlines()
         except FileNotFoundError:
             print("File does not exist.")
