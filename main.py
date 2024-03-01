@@ -1,5 +1,3 @@
-import requests
-from requests.auth import HTTPBasicAuth
 from ClientAuth import App_authentication
 
 
