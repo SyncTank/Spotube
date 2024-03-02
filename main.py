@@ -1,18 +1,20 @@
 from SpotifyClientAuth import App_authentication
+from InterfaceSpt import MainWindow
 import dearpygui.dearpygui as dpg
-
 
 # New_user = App_authentication()
 # New_user.request_example()
+
+#main_window = MainWindow()
+
+
 
 def on_button_click(sender, app_data):
     input_text = dpg.get_value("input_text_tag")
     print(f"Button clicked! {input_text}")
 
-
 def save_callback(reponse):
     print(f"Save Clicked")
-
 
 dpg.create_context()
 
