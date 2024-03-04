@@ -1,4 +1,5 @@
-from SpotifyClientAuth import App_authentication
+from SpotifyClientAuth import Spotify_Auth
+from YoutubeClientAuth import Youtube_Auth
 from InterfaceSpt import MainWindow
 
 

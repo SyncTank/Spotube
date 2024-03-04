@@ -2,7 +2,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 
-class App_authentication:
+class Spotify_Auth:
     def __init__(self):
         self._client_id: str = 'YOUR_CLIENT_ID'
         self._client_secret: str = 'Your_SECRET_KEY'
@@ -16,7 +16,7 @@ class App_authentication:
 
     def _setup_client(self) -> None:
         try:
-            with open("ClientAuth.txt", "r") as file:
+            with open("SpotifyClientAuth.txt", "r") as file:
                 self._content = file.readlines()
         except FileNotFoundError:
             print("File does not exist.")
