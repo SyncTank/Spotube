@@ -1,27 +1,9 @@
 from SpotifyClientAuth import App_authentication
-# from InterfaceSpt import MainWindow
-import dearpygui.dearpygui as dpg
+from InterfaceSpt import MainWindow
 
 
 # New_user = App_authentication()
 # New_user.request_example()
 
-# main_window = MainWindow()
+main_window = MainWindow(800, 600)
 
-dpg.create_context()
-
-with dpg.window(tag="Primary Window"):
-    dpg.add_text("Hello, world")
-    dpg.add_button(label="Save")
-    dpg.add_input_text(label="string", default_value="Quick brown fox")
-    dpg.add_slider_float(label="float", default_value=0.273, max_value=1)
-
-
-
-
-dpg.create_viewport(title='Custom Title', width=600, height=200)
-dpg.setup_dearpygui()
-dpg.show_viewport()
-dpg.set_primary_window("Primary Window", True)
-dpg.start_dearpygui()
-dpg.destroy_context()
