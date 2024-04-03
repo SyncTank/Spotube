@@ -1,5 +1,5 @@
-from SpotifyClientAuth import Spotify_Auth
-from YoutubeClientAuth import Youtube_Auth
+from SpotifyClientAuth import *
+from YoutubeClientAuth import * 
 from InterfaceSpt import MainWindow
 import pyyoutube
 import asyncio
@@ -10,9 +10,9 @@ import asyncio
 
 #main_window = MainWindow(800, 600)
 
-async def main():
-    print('Hello ...')
-    await asyncio.sleep(1)
-    print('... World!')
+def main():
+    SpotClient = SpotiftClientAuth()
+    print(SpotClient)
 
-asyncio.run(main())
+
+main()
