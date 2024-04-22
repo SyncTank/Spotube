@@ -16,7 +16,7 @@ class Spotify_Auth:
 
     def _setup_client(self) -> None:
         try:
-            with open("SpotifyClientAuth.txt", "r") as file:
+            with open("../private/SpotifyClientAuth.txt", "r") as file:
                 self._content = file.readlines()
         except FileNotFoundError:
             print("File does not exist.")
