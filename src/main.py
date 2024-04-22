@@ -12,12 +12,6 @@ import asyncio
 
 # https://youtube.com/playlist?list=PLaQ2znw11EHJ0KlUDDzuXyqll-db3hWX6&si=WEOSDl4QMg2JlcW4
 
-async def main():
-    print('Hello ...')
-    await asyncio.sleep(1)
-    print('... World!')
-
-asyncio.run(main())
 
 def main():
     main_window = MainWindow(800, 600)
