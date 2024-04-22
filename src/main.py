@@ -8,9 +8,11 @@ import asyncio
 # New_user = App_authentication()
 # New_user.request_example()
 
-def main():
-    main_window = MainWindow(800, 600)
+#main_window = MainWindow(800, 600)
 
+async def main():
+    print('Hello ...')
+    await asyncio.sleep(1)
+    print('... World!')
 
-if __name__ == '__main__':
-    main()
+asyncio.run(main())
