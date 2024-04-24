@@ -26,11 +26,12 @@ def pull_json_data(pulldata: str) -> dict:
 
     return data
 
+
 def main():
-    #spotify_client = SpotifyAuth()
+    spotify_client = SpotifyAuth()
     #youtube_client = YoutubeAuth()
 
-    #spotify_client.request_playlist("4pydUxIkuBaI3T1v6lhImj")
+    spotify_client.request_playlist("4pydUxIkuBaI3T1v6lhImj")
 
     #main_window = MainWindow(800, 600)
 
@@ -39,11 +40,12 @@ def main():
 
     playlist_log = set()
 
-    for item in playlist_data['tracks']['items']:
+    for item in playlist_data:
         playlist_log.add((item['track']['name'], item['track']['artists'][0]['name'], item['track']['album']['name']))
     playlist_data.clear()
 
     print(playlist_log)
+
 
 if __name__ == '__main__':
     main()
