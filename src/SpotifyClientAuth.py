@@ -52,8 +52,9 @@ class SpotifyAuth:
         print(f"Access Token: {self.__token}")
 
     def request_playlist(self, request: str) -> None:
+        # Add streaming to file async
         playlist_request = self.__base_url + 'playlists/' + request
-        headers = {"Authorization": f"Bearer {self.__token}", }
+        headers = {"Authorization": f"Bearer {self.__token}", "fields": f"tracks(items)"}
         response = requests.get(playlist_request, headers=headers)
         self.content = response.json()
 
