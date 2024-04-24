@@ -1,6 +1,6 @@
-import os.path
-
 import requests
+import json
+import os
 from requests.auth import HTTPBasicAuth
 
 
@@ -51,8 +51,16 @@ class SpotifyAuth:
 
         print(f"Access Token: {self.__token}")
 
-    def request_example(self, request: str) -> None:
+    def request_playlist(self, request: str) -> None:
+        playlist_request = self.__base_url + 'playlists/' + request
         headers = {"Authorization": f"Bearer {self.__token}", }
-        response = requests.get(f"{self.__base_url}{request}", headers=headers)
+        response = requests.get(playlist_request, headers=headers)
+        self.content = response.json()
 
-        print(response.json(), response.status_code)
+        if os.path.exists("SpotifyDump.json"):
+            os.remove("SpotifyDump.json")
+
+        with open("SpotifyDump.json", "w", encoding='utf-8') as file:
+            json.dump(self.content, file, ensure_ascii=False, indent=4)
+
+        print(response.status_code, self.content)
