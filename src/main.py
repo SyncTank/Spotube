@@ -1,5 +1,5 @@
-from SpotifyClientAuth import Spotify_auth
-from YoutubeClientAuth import Youtube_Auth
+from SpotifyClientAuth import SpotifyAuth
+from YoutubeClientAuth import YoutubeAuth
 from InterfaceSpt import MainWindow
 import pyyoutube
 import asyncio
@@ -14,8 +14,12 @@ import asyncio
 
 
 def main():
-    main_window = MainWindow(800, 600)
+    spotify_client = SpotifyAuth()
+    youtube_client = YoutubeAuth()
 
+    spotify_client.request_example("artists/4Z8W4fKeB5YxbusRsdQVPb")
+
+    main_window = MainWindow(800, 600)
 
 if __name__ == '__main__':
     main()
