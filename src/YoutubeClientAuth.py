@@ -3,6 +3,6 @@ from requests.auth import HTTPBasicAuth
 import pyyoutube
 
 
-class Youtube_Auth:
+class YoutubeAuth:
     def __init__(self):
         pass

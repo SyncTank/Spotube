@@ -1,4 +1,4 @@
-from SpotifyClientAuth import Spotify_Auth
+from SpotifyClientAuth import Spotify_auth
 from YoutubeClientAuth import Youtube_Auth
 from InterfaceSpt import MainWindow
 import pyyoutube
