@@ -56,7 +56,6 @@ class SpotifyAuth:
         if os.path.exists(playlist_name):
             os.remove(playlist_name)
 
-        # Add streaming to file
         playlist_request = self.__base_url + 'playlists/' + request
         field_filter = '?fields=tracks.items%28track%28name%2C+artists%2C+album%28name%29+%29%29'
         headers = {"Authorization": f"Bearer {self.__token}"}
@@ -64,3 +63,6 @@ class SpotifyAuth:
 
         with open("SpotifyDump.json", "w", encoding='utf-8') as file:
             json.dump(response, file, ensure_ascii=False, indent=4)
+
+    def create_playlist(self, request: str):
+        return NotImplementedError
