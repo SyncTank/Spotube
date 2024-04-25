@@ -1,10 +1,10 @@
 import json
+import InterfaceSpt
 
 from SpotifyClientAuth import SpotifyAuth
 from YoutubeClientAuth import YoutubeAuth
 from InterfaceSpt import MainWindow
 import pyyoutube
-import asyncio
 
 
 # New_user = App_authentication()
@@ -27,24 +27,27 @@ def pull_json_data(pulldata: str) -> dict:
     return data
 
 
-def main():
-    spotify_client = SpotifyAuth()
-    #youtube_client = YoutubeAuth()
-
-    spotify_client.request_playlist("4pydUxIkuBaI3T1v6lhImj")
-
-    #main_window = MainWindow(800, 600)
-
+def spotify_playlist_relog() -> set:
     playlist_data = pull_json_data('SpotifyDump.json')
-    print()
-
     playlist_log = set()
 
-    for item in playlist_data:
-        playlist_log.add((item['track']['name'], item['track']['artists'][0]['name'], item['track']['album']['name']))
-    playlist_data.clear()
+    for item in playlist_data['tracks']['items']:
+        song = item['track']['name']
+        album = item['track']['album']['name']
+        artist = item['track']['artists'][0]['name']
+        playlist_log.add((song, album, artist))
 
-    print(playlist_log)
+    return playlist_log
+
+
+def main():
+    #spotify_client = SpotifyAuth()
+    #youtube_client = YoutubeAuth()
+
+    #spotify_client.request_playlist("4pydUxIkuBaI3T1v6lhImj")
+    #spotify_data = spotify_playlist_relog()
+
+    main_window = MainWindow(800, 600)
 
 
 if __name__ == '__main__':
