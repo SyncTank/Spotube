@@ -12,3 +12,6 @@ class YoutubeAuth:
         self.__url_token: str = ""
         self.response: str = ''
         self.__token: str = ''
+        print("test")
+
+# private file implement extend with Auth class.

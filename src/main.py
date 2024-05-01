@@ -42,7 +42,7 @@ def spotify_playlist_relog() -> set:
 
 def main():
     #spotify_client = SpotifyAuth()
-    #youtube_client = YoutubeAuth()
+    youtube_client = YoutubeAuth()
 
     #spotify_client.request_playlist("4pydUxIkuBaI3T1v6lhImj")
     #spotify_data = spotify_playlist_relog()
