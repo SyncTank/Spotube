@@ -1,13 +1,17 @@
+import json
+import os
+from requests_oauthlib import HTTPBasicAtuh
+
 class Auth:
     def __init__(self):
         self.__client_id: str = 'YOUR_CLIENT_ID'
         self.__client_secret: str = 'Your_SECRET_KEY'
         self.content: list = []
-        self.__base_url: str = ''
-        self.__url_token: str = ""
+        self.__url_token: str = url_token
+        self.__file_path: str = file_path
         self.response: str = ''
         self.__token: str = ''
-        self.__setup_client()
+        self.__setup_client(self.__file_path)
         try:
             self.__authenticate()
         except Exception as e:
@@ -44,3 +48,14 @@ class Auth:
             raise Exception("Invalid token.")
 
         print(f"Access Token: {self.__token}")
+
+
+    def pull_json_data(self, pulldata: str) -> dict:
+        data : dict = dict()
+        try:
+            with open(pulldata, 'r') as json_data:
+                data = json.load(json_data)
+        except Exception as e:
+            print(e)
+
+        return data
