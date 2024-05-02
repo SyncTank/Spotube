@@ -15,14 +15,9 @@ def pull_json_data(pulldata: str) -> dict:
     return data
 
 def set_path() -> str:
-    current_dir = os.getcwd()
-
-    if current_dir is not "Spotube":
-        print(f"{os.getcwd()}", current_dir is not "Spotube")
+    while "src" in os.getcwd():
         os.chdir("..")
-        print(f"{os.getcwd()}", current_dir is not "Spotube")
-
-    return ""
+    return os.getcwd()
 
 class Auth:
     def __init__(self):
