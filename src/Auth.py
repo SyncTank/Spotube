@@ -26,7 +26,7 @@ class Auth:
         self.content: list = []
         self.response = ''
         self.__token: str = ''
-        self.file_dir: str = set_path()
+        self.file_dir: str = os.getcwd()
 
     def setup_client(self, file_path: str) -> None:
         try:
@@ -44,7 +44,7 @@ class Auth:
             print("Please read docs or contact the administrator.")
         self.content.clear()
 
-    def authenticate(self, url_token: str, status: int = 200) -> None:
+    def authenticate(self, url_token: str, status: int = 200) -> str:
         if status == 200 and len(self.__token) < 1:
             self.response = requests.post(url_token,
                                           data={'grant_type': 'client_credentials'},
@@ -61,3 +61,4 @@ class Auth:
             raise Exception("Invalid token.")
 
         print(f"Access Token: {self.__token}\nData reponse: {self.response}")
+        return self.__token

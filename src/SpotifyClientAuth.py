@@ -6,6 +6,24 @@ import requests
 from Auth import Auth, pull_json_data
 
 
+def spotify_relog() -> set:
+    playlist_data = dict(pull_json_data('SpotifyDump.json'))
+    playlist_log = set()
+    print(os.getcwd())
+    playlist_data = playlist_data['tracks']['items']
+
+    for item in playlist_data:
+        song = item['track']['name']
+        album = item['track']['album']['name']
+        artist = item['track']['artists'][0]['name']
+        playlist_log.add((song, album, artist))
+
+    for i in playlist_log:
+        print(i)
+
+    return playlist_log
+
+
 class SpotifyAuth(Auth):
     def __init__(self):
         super().__init__()
@@ -14,7 +32,7 @@ class SpotifyAuth(Auth):
         self.__self_path: str = "SpotifyClientAuth.txt"
         self.setup_client(self.__self_path)
         try:
-            self.authenticate(self.__url_token)
+            self.__token = self.authenticate(self.__url_token)
         except Exception as e:
             print(e)
 
@@ -30,18 +48,6 @@ class SpotifyAuth(Auth):
 
         with open("SpotifyDump.json", "w", encoding='utf-8') as file:
             json.dump(response, file, ensure_ascii=False, indent=4)
-
-    def spotify_playlist_relog(self) -> set:
-        playlist_data = pull_json_data('SpotifyDump.json')
-        playlist_log = set()
-
-        for item in playlist_data['tracks']['items']:
-            song = item['track']['name']
-            album = item['track']['album']['name']
-            artist = item['track']['artists'][0]['name']
-            playlist_log.add((song, album, artist))
-
-        return playlist_log
 
     def create_playlist(self, request: str):
         return NotImplementedError
