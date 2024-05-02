@@ -1,6 +1,8 @@
 import json
 
 from SpotifyClientAuth import SpotifyAuth
+
+
 #from YoutubeClientAuth import YoutubeAuth
 #from InterfaceSpt import MainWindow
 
@@ -15,22 +17,16 @@ from SpotifyClientAuth import SpotifyAuth
 # https://youtube.com/playlist?list=PLaQ2znw11EHJ0KlUDDzuXyqll-db3hWX6&si=WEOSDl4QMg2JlcW4
 
 
-
-
-
-
-
 def main():
-    #spotify_client = SpotifyAuth()
+    spotify_client = SpotifyAuth()
     #youtube_client = YoutubeAuth()
-
-    print()
 
     #spotify_client.request_playlist("4pydUxIkuBaI3T1v6lhImj")
     #spotify_data = spotify_playlist_relog()
 
     #main_window = MainWindow(800, 600)
     pass
+
 
 if __name__ == '__main__':
     main()

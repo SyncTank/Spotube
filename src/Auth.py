@@ -1,4 +1,5 @@
 import json
+import os
 import requests
 from requests.auth import HTTPBasicAuth
 
@@ -13,6 +14,15 @@ def pull_json_data(pulldata: str) -> dict:
 
     return data
 
+def set_path() -> str:
+    current_dir = os.getcwd()
+
+    if current_dir is not "Spotube":
+        print(f"{os.getcwd()}", current_dir is not "Spotube")
+        os.chdir("..")
+        print(f"{os.getcwd()}", current_dir is not "Spotube")
+
+    return ""
 
 class Auth:
     def __init__(self):
@@ -21,22 +31,25 @@ class Auth:
         self.content: list = []
         self.response = ''
         self.__token: str = ''
+        self.file_dir: str = set_path()
 
-    def __setup_client(self, file_path: str) -> None:
+    def setup_client(self, file_path: str) -> None:
         try:
-            with open(f"private/{file_path}", "r") as file:
+            print(f"{self.file_dir}/private/{file_path}")
+            with open(f"{self.file_dir}/private/{file_path}", "r") as file:
                 self.content = file.readlines()
         except FileNotFoundError:
             print("File does not exist.")
 
         if self.content is not None:
+            print(f"{self.content}, {type(self.content)}")
             self.__client_id = self.content[0].replace("\n", "")
             self.__client_secret = self.content[1]
         else:
             print("Please read docs or contact the administrator.")
         self.content.clear()
 
-    def __authenticate(self, url_token: str, status=200) -> None:
+    def authenticate(self, url_token: str, status: int = 200) -> None:
         if status == 200 and len(self.__token) < 1:
             self.response = requests.post(url_token,
                                           data={'grant_type': 'client_credentials'},

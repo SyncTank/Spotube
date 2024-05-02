@@ -11,10 +11,10 @@ class SpotifyAuth(Auth):
         super().__init__()
         self.__url_token: str = "https://accounts.spotify.com/api/token"
         self.__base_url: str = 'https://api.spotify.com/v1/'
-        self.__self_path = "SpotifyClientAuth.txt"
-        self.__setup_client(self.__self_path)
+        self.__self_path: str = "SpotifyClientAuth.txt"
+        self.setup_client(self.__self_path)
         try:
-            self.__authenticate(self.__url_token)
+            self.authenticate(self.__url_token)
         except Exception as e:
             print(e)
 
