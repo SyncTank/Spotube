@@ -18,8 +18,8 @@ def spotify_relog() -> set:
         artist = item['track']['artists'][0]['name']
         playlist_log.add((song, album, artist))
 
-    for i in playlist_log:
-        print(i)
+    #for i in playlist_log:
+    #    print(i)
 
     return playlist_log
 

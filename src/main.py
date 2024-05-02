@@ -25,7 +25,7 @@ def main():
 
     spotify_data = spotify_relog()
 
-    #main_window = MainWindow(800, 600)
+    main_window = MainWindow(800, 600)
 
 
 if __name__ == '__main__':
