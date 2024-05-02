@@ -1,17 +1,26 @@
 import requests
-from requests.auth import HTTPBasicAuth
-import pyyoutube
+import os 
+import json
 
+from Auth import Auth, pull_json_data
 
-class YoutubeAuth:
+def youtube_relog() -> NotImplemented:
+    return NotImplemented
+
+class YoutubeAuth(Auth):
     def __init__(self):
-        self.__client_id: str = 'YOUR_CLIENT_ID'
-        self.__client_secret: str = 'Your_SECRET_KEY'
-        self._content: list = []
-        self.__base_url: str = ''
+        super().__init__()
         self.__url_token: str = ""
-        self.response: str = ''
-        self.__token: str = ''
-        print("test")
+        self.__base_url: str = ''
+        self.__self_path: str = "YoutubeClientAuth2.txt"
+        self.setup_client(self.__self_path)
+        try:
+            self.__token = self.authenticate(self.__url_token)
+        except Exception as e:
+            print(e)
 
-# private file implement extend with Auth class.
+    def request_playlist(self, request: str) -> NotImplemented:
+        return NotImplemented
+
+    def create_playlist(self, request: str) -> NotImplemented:
+        return NotImplemented
