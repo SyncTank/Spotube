@@ -3,12 +3,20 @@ import os
 
 import requests
 
-from Auth import Auth
+from Auth import Auth, pull_json_data
+
 
 class SpotifyAuth(Auth):
     def __init__(self):
         super().__init__()
+        self.__url_token: str = "https://accounts.spotify.com/api/token"
         self.__base_url: str = 'https://api.spotify.com/v1/'
+        self.__self_path = "SpotifyClientAuth.txt"
+        self.__setup_client(self.__self_path)
+        try:
+            self.__authenticate(self.__url_token)
+        except Exception as e:
+            print(e)
 
     def request_playlist(self, request: str) -> None:
         playlist_name = "SpotifyDump.json"
@@ -23,9 +31,8 @@ class SpotifyAuth(Auth):
         with open("SpotifyDump.json", "w", encoding='utf-8') as file:
             json.dump(response, file, ensure_ascii=False, indent=4)
 
-
     def spotify_playlist_relog(self) -> set:
-        playlist_data = self.pull_json_data('SpotifyDump.json')
+        playlist_data = pull_json_data('SpotifyDump.json')
         playlist_log = set()
 
         for item in playlist_data['tracks']['items']:

@@ -1,21 +1,26 @@
 import json
-import os
-from requests_oauthlib import HTTPBasicAtuh
+import requests
+from requests.auth import HTTPBasicAuth
+
+
+def pull_json_data(pulldata: str) -> dict:
+    data: dict = dict()
+    try:
+        with open(pulldata, 'r') as json_data:
+            data = json.load(json_data)
+    except Exception as e:
+        print(e)
+
+    return data
+
 
 class Auth:
     def __init__(self):
         self.__client_id: str = 'YOUR_CLIENT_ID'
         self.__client_secret: str = 'Your_SECRET_KEY'
         self.content: list = []
-        self.__url_token: str = url_token
-        self.__file_path: str = file_path
-        self.response: str = ''
+        self.response = ''
         self.__token: str = ''
-        self.__setup_client(self.__file_path)
-        try:
-            self.__authenticate()
-        except Exception as e:
-            print(e)
 
     def __setup_client(self, file_path: str) -> None:
         try:
@@ -31,14 +36,14 @@ class Auth:
             print("Please read docs or contact the administrator.")
         self.content.clear()
 
-    def __authenticate(self, status=200) -> None:
+    def __authenticate(self, url_token: str, status=200) -> None:
         if status == 200 and len(self.__token) < 1:
-            self.response = requests.post(self.__url_token,
+            self.response = requests.post(url_token,
                                           data={'grant_type': 'client_credentials'},
                                           auth=HTTPBasicAuth(self.__client_id, self.__client_secret))
             self.__token = self.response.json().get('access_token')
         elif status != 200:
-            self.response = requests.post(self.__url_token,
+            self.response = requests.post(url_token,
                                           data={'grant_type': 'refresh_token',
                                                 'refresh_token': self.__token, },
                                           auth=HTTPBasicAuth(self.__client_id, self.__client_secret))
@@ -47,15 +52,4 @@ class Auth:
         else:
             raise Exception("Invalid token.")
 
-        print(f"Access Token: {self.__token}")
-
-
-    def pull_json_data(self, pulldata: str) -> dict:
-        data : dict = dict()
-        try:
-            with open(pulldata, 'r') as json_data:
-                data = json.load(json_data)
-        except Exception as e:
-            print(e)
-
-        return data
+        print(f"Access Token: {self.__token}\nData reponse: {self.response}")
