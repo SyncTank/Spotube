@@ -1,5 +1,6 @@
 from Auth import set_path
 from SpotifyClientAuth import SpotifyAuth, spotify_relog
+from YoutubeClientAuth import YoutubeAuth, youtube_relog
 from InterfaceSpt import MainWindow
 
 #from YoutubeClientAuth import YoutubeAuth
@@ -19,11 +20,13 @@ from InterfaceSpt import MainWindow
 def main():
     set_path()
     #spotify_client = SpotifyAuth()
-    #youtube_client = YoutubeAuth()
+    youtube_client = YoutubeAuth()
     
     #spotify_client.request_playlist("4pydUxIkuBaI3T1v6lhImj")
+    #youtube_client.request_playlist("")
 
-    spotify_data = spotify_relog()
+    #spotify_data = spotify_relog()
+    #youtube_data = youtube_relog()
 
     main_window = MainWindow(800, 600)
 
