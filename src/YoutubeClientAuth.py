@@ -13,10 +13,6 @@ def youtube_relog() -> list:
 
     for i, v in enumerate(file):
         request_data.append(v.strip("{").strip("\n").strip("}"))
-        print(i, f"{v}")
-
-    for i in request_data:
-        print(i)
 
     return request_data
 
