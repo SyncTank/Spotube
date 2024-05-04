@@ -4,18 +4,19 @@ from pytube import Playlist, YouTube
 
 def youtube_relog() -> list:
     request_data = []
+    file = ''
     try:
         with open('YoutubeDump.txt', 'r') as data:
             file = data.read().split(",")
     except Exception as e:
         print(e)
 
-    print(type(file))
     for i, v in enumerate(file):
-        request_data.append(v)
+        request_data.append(v.strip("{").strip("\n").strip("}"))
         print(i, f"{v}")
 
-    print(request_data)
+    for i in request_data:
+        print(i)
 
     return request_data
 
@@ -37,7 +38,7 @@ class YoutubeAuth:
             print(f"Title: {youtube.title}")
 
         with open("YoutubeDump.txt", "w") as file:
-            file.writelines(playlist_data)
+            file.write(str(playlist_data))
 
     def create_playlist(self, request: str) -> NotImplemented:
         return NotImplemented
