@@ -14,10 +14,12 @@ def pull_json_data(pulldata: str) -> dict:
 
     return data
 
+
 def set_path() -> str:
     while "src" in os.getcwd():
         os.chdir("..")
     return os.getcwd()
+
 
 class Auth:
     def __init__(self):
@@ -26,6 +28,7 @@ class Auth:
         self.content: list = []
         self.response = ''
         self.__token: str = ''
+        self.__api_key: str = ''
         self.file_dir: str = os.getcwd()
 
     def setup_client(self, file_path: str) -> None:
@@ -39,7 +42,10 @@ class Auth:
         if self.content is not None:
             print(f"{self.content}, {type(self.content)}")
             self.__client_id = self.content[0].replace("\n", "")
-            self.__client_secret = self.content[1]
+            if len(self.content) > 1:
+                self.__client_secret = self.content[1].replace("\n", "")
+                if len(self.content) > 2:
+                    self.__api_key = self.content[2].replace("\n", "")
         else:
             print("Please read docs or contact the administrator.")
         self.content.clear()
@@ -50,15 +56,6 @@ class Auth:
                                           data={'grant_type': 'client_credentials'},
                                           auth=HTTPBasicAuth(self.__client_id, self.__client_secret))
             self.__token = self.response.json().get('access_token')
-        elif status != 200:
-            self.response = requests.post(url_token,
-                                          data={'grant_type': 'refresh_token',
-                                                'refresh_token': self.__token, },
-                                          auth=HTTPBasicAuth(self.__client_id, self.__client_secret))
 
-            self.__token = self.response.json().get('access_token')
-        else:
-            raise Exception("Invalid token.")
-
-        print(f"Access Token: {self.__token}\nData reponse: {self.response}")
+        print(f"Access Token: {self.__token}\nData response: {self.response}")
         return self.__token

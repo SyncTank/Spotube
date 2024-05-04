@@ -1,6 +1,5 @@
 import json
 import os
-
 import requests
 
 from Auth import Auth, pull_json_data

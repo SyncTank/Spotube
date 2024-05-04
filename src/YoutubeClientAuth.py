@@ -1,26 +1,31 @@
-import requests
-import os 
-import json
+import os
+from pytube import Playlist, YouTube
 
-from Auth import Auth, pull_json_data
 
-def youtube_relog() -> NotImplemented:
-    return NotImplemented
+def youtube_relog() -> list:
+    request_data = []
 
-class YoutubeAuth(Auth):
+    return request_data
+
+
+class YoutubeAuth:
     def __init__(self):
-        super().__init__()
-        self.__url_token: str = ""
-        self.__base_url: str = ''
-        self.__self_path: str = "YoutubeClientAuth2.txt"
-        self.setup_client(self.__self_path)
-        try:
-            self.__token = self.authenticate(self.__url_token)
-        except Exception as e:
-            print(e)
+        self.playlist_name: str = ''
 
-    def request_playlist(self, request: str) -> NotImplemented:
-        return NotImplemented
+    def request_playlist(self, request: str) -> None:
+        self.playlist_name = "YoutubeDump.json"
+        if os.path.exists(self.playlist_name):
+            os.remove(self.playlist_name)
+
+        playlist = Playlist(request)
+        playlist_data = set()
+        for url in playlist.video_urls:
+            youtube = YouTube(url)
+            playlist_data.add(youtube.title)
+            print(f"Title: {youtube.title}")
+
+        with open("YoutubeDump.txt", "w") as file:
+            file.write(str(playlist_data))
 
     def create_playlist(self, request: str) -> NotImplemented:
         return NotImplemented
