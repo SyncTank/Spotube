@@ -12,7 +12,10 @@ def youtube_relog() -> list:
 
     print(type(file))
     for i, v in enumerate(file):
+        request_data.append(v)
         print(i, f"{v}")
+
+    print(request_data)
 
     return request_data
 
@@ -22,7 +25,7 @@ class YoutubeAuth:
         self.playlist_name: str = ''
 
     def request_playlist(self, request: str) -> None:
-        self.playlist_name = "YoutubeDump.json"
+        self.playlist_name = "YoutubeDump.txt"
         if os.path.exists(self.playlist_name):
             os.remove(self.playlist_name)
 
