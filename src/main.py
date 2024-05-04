@@ -23,10 +23,10 @@ def main():
     youtube_client = YoutubeAuth()
     
     #spotify_client.request_playlist("4pydUxIkuBaI3T1v6lhImj")
-    youtube_client.request_playlist("https://youtube.com/playlist?list=PLaQ2znw11EHIBF-SH802jObjHSpTB4ZNV&si=9BFg_iQSN_GNryFY")
+    #youtube_client.request_playlist("https://youtube.com/playlist?list=PLaQ2znw11EHIBF-SH802jObjHSpTB4ZNV&si=9BFg_iQSN_GNryFY")
 
     #spotify_data = spotify_relog()
-    #youtube_data = youtube_relog()
+    youtube_data = youtube_relog()
 
     #main_window = MainWindow(800, 600)
 

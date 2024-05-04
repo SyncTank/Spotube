@@ -4,6 +4,15 @@ from pytube import Playlist, YouTube
 
 def youtube_relog() -> list:
     request_data = []
+    try:
+        with open('YoutubeDump.txt', 'r') as data:
+            file = data.read().split(",")
+    except Exception as e:
+        print(e)
+
+    print(type(file))
+    for i, v in enumerate(file):
+        print(i, v)
 
     return request_data
 
