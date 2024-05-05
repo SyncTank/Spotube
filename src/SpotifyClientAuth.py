@@ -35,6 +35,7 @@ class SpotifyAuth(Auth):
             self.__token = self.authenticate(self.__url_token)
         except Exception as e:
             print(e)
+        self.__header = {"Authorization": f"Bearer {self.__token}"}
 
     def request_playlist(self, request: str) -> None:
         playlist_name = "SpotifyDump.json"
@@ -43,15 +44,19 @@ class SpotifyAuth(Auth):
 
         playlist_request = self.__base_url + 'playlists/' + request
         field_filter = '?fields=tracks.items%28track%28name%2C+artists%2C+album%28name%29+%29%29'
-        headers = {"Authorization": f"Bearer {self.__token}"}
-        response = requests.get(playlist_request + field_filter, headers=headers, stream=True).json()
+        response = requests.get(playlist_request + field_filter, headers=self.__header, stream=True).json()
 
         with open("SpotifyDump.json", "w", encoding='utf-8') as file:
             json.dump(response, file, ensure_ascii=False, indent=4)
 
 
     def spotify_search(self, log_items: list) -> None:
-        pass
+        for song in log_items:
+            song_search = self.__base_url + "search?q=" + song.replace(" ","+") + "&type=track&limit=10"
+            r = requests.get(song_search,headers=self.__header, stream=True)
+            print(song, r, )
+            if r.status_code == 400 or r.status_code == 200:
+                break
 
 
     def create_playlist(self, request: str):
