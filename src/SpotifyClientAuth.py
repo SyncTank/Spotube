@@ -29,6 +29,7 @@ class SpotifyAuth(Auth):
         self.__url_token: str = "https://accounts.spotify.com/api/token"
         self.__base_url: str = 'https://api.spotify.com/v1/'
         self.__self_path: str = "SpotifyClientAuth.txt"
+        self.__search_list: list  = []
         self.setup_client(self.__self_path)
         try:
             self.__token = self.authenticate(self.__url_token)
@@ -47,6 +48,11 @@ class SpotifyAuth(Auth):
 
         with open("SpotifyDump.json", "w", encoding='utf-8') as file:
             json.dump(response, file, ensure_ascii=False, indent=4)
+
+
+    def spotify_search(self, log_items: list) -> None:
+        pass
+
 
     def create_playlist(self, request: str):
         return NotImplementedError
