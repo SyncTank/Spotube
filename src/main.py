@@ -17,6 +17,9 @@ from InterfaceSpt import MainWindow
 # https://youtube.com/playlist?list=PLaQ2znw11EHJ0KlUDDzuXyqll-db3hWX6&si=WEOSDl4QMg2JlcW4
 # https://youtube.com/playlist?list=PLaQ2znw11EHIBF-SH802jObjHSpTB4ZNV&si=9BFg_iQSN_GNryFY
 
+# Playlist to addinto for test
+# https://open.spotify.com/playlist/4ChHbaRX9II5dHCKrPkgWP?si=03c68fd95cbe4833
+
 def main():
     set_path()
     spotify_client = SpotifyAuth()
