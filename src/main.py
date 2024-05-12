@@ -1,4 +1,7 @@
 from Auth import set_path, Auth
+import time
+import spotipy.oauth2 as SpotifyOAuth
+from flask import Flask, request, url_for, session, redirect
 from SpotifyClientAuth import SpotifyAuth, spotify_relog
 from YoutubeClientAuth import YoutubeAuth, youtube_relog
 from InterfaceSpt import MainWindow
@@ -20,13 +23,35 @@ from InterfaceSpt import MainWindow
 # Playlist to addinto for test
 # https://open.spotify.com/playlist/4ChHbaRX9II5dHCKrPkgWP?si=03c68fd95cbe4833
 
+app = Flask(__name__)
+app.config['SESSION_COOKIE_NAME'] = 'Spotify Cookie'
+app.secret_key = 'secret key'
+TOKEN_INFO = 'token_info'
+
+
+@app.route('/')
+def login():
+    auth_url = create_spotify_oauth().get_authorize_url()
+    return redirect(auth_url)
+
+
+@app.route('/redirect')
+def redirect_page():
+    session.clear()
+    code = request.args.get('code')
+    token_info = create_spotify_oauth().get_access_token(code)
+    session[TOKEN_INFO] = token_info
+    return redirect(url_for('login', _external=True))
+
+
+
 def main():
     set_path()
+
     #spotify_client = SpotifyAuth()
     #youtube_client = YoutubeAuth()
-    auth_client = Auth()
+    #auth_client = Auth()
 
-    
     #spotify_client.request_playlist("4pydUxIkuBaI3T1v6lhImj")
     #youtube_client.request_playlist("https://youtube.com/playlist?list=PLaQ2znw11EHIBF-SH802jObjHSpTB4ZNV&si=9BFg_iQSN_GNryFY")
 
