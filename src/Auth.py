@@ -30,6 +30,7 @@ class Auth:
         self.__token: str = ''
         self.__api_key: str = ''
         self.file_dir: str = os.getcwd()
+        self.authenticate()
 
     def setup_client(self, file_path: str) -> None:
         try:
@@ -51,11 +52,13 @@ class Auth:
         self.content.clear()
 
     def authenticate(self, url_token: str, status: int = 200) -> str:
-        if status == 200 and len(self.__token) < 1:
-            self.response = requests.post(url_token,
-                                          data={'grant_type': 'client_credentials'},
-                                          auth=HTTPBasicAuth(self.__client_id, self.__client_secret))
-            self.__token = self.response.json().get('access_token')
+        #if status == 200 and len(self.__token) < 1:
+        #    self.response = requests.post(url_token,
+        #                                  data={'grant_type': 'client_credentials'},
+        #                                 auth=HTTPBasicAuth(self.__client_id, self.__client_secret))
+        #  self.__token = self.response.json().get('access_token')
+
+
 
         print(f"Access Token: {self.__token}\nData response: {self.response}")
         return self.__token

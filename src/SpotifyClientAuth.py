@@ -54,16 +54,14 @@ class SpotifyAuth(Auth):
             song_search = self.__base_url + "search?q=" + song.replace(" ", "+") + "&type=track&limit=10"
             r = requests.get(song_search, headers=self.__header, stream=True).json()
             print(song, r['tracks']['items'][0]['name'], r['tracks']['items'][0]['id'])
-            self.add_too_playlist(r['tracks']['items'][0]['id'])
-            break
 
-    def add_too_playlist(self, request) -> None:
+    def add_too_playlist(self, request, uri) -> None:
         # 4ChHbaRX9II5dHCKrPkgWP
         headers = {
-            'Authorization': 'Bearer ' + self.__token,
+            "Authorization": f"Bearer {self.__token}",
             'Content-Type': 'application/json'
         }
         playlist_url = self.__base_url + "playlists/" + "4ChHbaRX9II5dHCKrPkgWP" + "/tracks?uris=spotify%3Atrack%3A" + request
         print(playlist_url)
-        response = requests.post(url=playlist_url, headers=headers, data={"uris": ["string"],"position": 0})
-        print(response)
+        response = requests.post(url=playlist_url, headers=headers, data={"uris": [f"{uri}"], "position": 0})
+        print(response, response.text)
