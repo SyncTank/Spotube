@@ -34,16 +34,27 @@ app.config['SESSION_COOKIE_NAME'] = 'User Cookie'
 
 @app.route('/')
 def login():
-    return 'Home Page'
+    sp_oauth = create_spotify_oauth()
+    auth_url = sp_oauth.get_authorize_url()
+    return redirect(auth_url)
 
 
 @app.route('/redirect')
-def redirect():
+def redirect_page():
+
+    access_token = spotify_relog()
     return 'redirect'
 
 
 clientid = 'f56a668f1c3c4844b710fb1ba262ae5a'
 clientsecrt = '27d7060127034d3ca551fd1785b4bf64'
+
+
+def create_spotify_oauth():
+    return SpotifyOAuth(client_id=clientid,
+                        client_secret=clientsecrt,
+                        redirect_uri=url_for('redirect_page', _external=True),
+                        scope='user-library-read')
 
 
 app.run()
