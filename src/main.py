@@ -25,12 +25,32 @@ from InterfaceSpt import MainWindow
 # Playlist to addinto for test
 # https://open.spotify.com/playlist/4ChHbaRX9II5dHCKrPkgWP?si=03c68fd95cbe4833
 
+
 app = Flask(__name__)
+
+app.secret_key = ""
+app.config['SESSION_COOKIE_NAME'] = 'User Cookie'
+
+
+@app.route('/')
+def login():
+    return 'Home Page'
+
+
+@app.route('/redirect')
+def redirect():
+    return 'redirect'
+
+
+clientid = 'f56a668f1c3c4844b710fb1ba262ae5a'
+clientsecrt = '27d7060127034d3ca551fd1785b4bf64'
+
+
+app.run()
 
 
 def main():
     set_path()
-
 
     #spotify_client = SpotifyAuth()
     #youtube_client = YoutubeAuth()
