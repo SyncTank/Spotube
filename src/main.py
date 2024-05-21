@@ -41,7 +41,8 @@ def login():
 
 @app.route('/redirect')
 def redirect_page():
-
+    sp_oauth = create_spotify_oauth()
+    session.clear()
     access_token = spotify_relog()
     return 'redirect'
 
