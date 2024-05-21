@@ -47,8 +47,7 @@ def redirect_page():
     return 'redirect'
 
 
-clientid = 'f56a668f1c3c4844b710fb1ba262ae5a'
-clientsecrt = '27d7060127034d3ca551fd1785b4bf64'
+
 
 
 def create_spotify_oauth():
